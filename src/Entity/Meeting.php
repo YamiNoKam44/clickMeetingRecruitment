@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Exception\Meeting\LimitHasBeenExceededException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -11,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: '`meetings`')]
 class Meeting
 {
+    public const DEFAULT_PARTICIPANT_LIMIT = 5;
+
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "NONE")]
     #[ORM\Column]
@@ -39,6 +42,10 @@ class Meeting
 
     public function addAParticipant(User $participant): void
     {
+        if ($this->participants->count() >= self::DEFAULT_PARTICIPANT_LIMIT) {
+            throw new LimitHasBeenExceededException('Max limit of participant has been exceeded');
+        }
+
         $this->participants->add($participant);
     }
 }

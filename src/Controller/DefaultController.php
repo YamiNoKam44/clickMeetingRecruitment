@@ -16,7 +16,7 @@ final class DefaultController
         $this->meetingRepository = $meetingRepository;
     }
 
-    #[Route('/meetings/{id}', name: 'meeting')]
+    #[Route('/meetings/{meetingId}', name: 'meeting')]
     public function meeting(string $meetingId): Response
     {
         $meeting = $this->meetingRepository->get($meetingId);
