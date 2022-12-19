@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Factory\Meeting\MeetingFactory;
 use App\Repository\MeetingRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,8 @@ final class DefaultController
     public function meeting(string $meetingId): Response
     {
         $meeting = $this->meetingRepository->get($meetingId);
-        return new JsonResponse($meeting);
+
+        return new JsonResponse(MeetingFactory::createWithStatus($meeting));
     }
 
     #[Route('/', name: 'home')]
