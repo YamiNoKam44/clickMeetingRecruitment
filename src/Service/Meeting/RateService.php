@@ -39,8 +39,6 @@ class RateService
             return new SetRateResponse('You are already rated this meeting', false);
         }
 
-
-
         try {
             $this->rateRepository->add(new Rate($meeting, $user, $rate));
         } catch (\Exception $exception) {
