@@ -7,12 +7,9 @@ namespace App\Service\Meeting;
 
 use App\Entity\Meeting\Rate;
 use App\Entity\User;
-use App\Exception\Meeting\RateAlreadyAddedException;
 use App\Repository\Meeting\RateRepository;
 use App\ValueObject\Meeting\MeetingRate;
 use App\ValueObject\Meeting\SetRateResponse;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 class RateService
 {
